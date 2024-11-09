@@ -19,7 +19,7 @@ library(jsonlite)
 ########### FIGURE 4.4 - Stimulation Procedure ###########
 
 ###########A###########
-geomonitor <- read_table("DAT-861.DAT")
+geomonitor <- read_table("../data/DAT-861.DAT")
 baseline <- geomonitor[-c(1:4),c(1:2,43)]
 baseline <- baseline[c(5041:13681),]
 
@@ -51,7 +51,7 @@ s <- ggplot(baseline, aes(Time_Elapsed)) +
   ylim(0,205)
 
 ###########B###########
-dataGeoAug3 <- read.csv("geomonitor_aug3.csv")
+dataGeoAug3 <- read.csv("../data/geomonitor_aug3.csv")
 # time elapsed
 dataGeoAug3$Time <- as.POSIXct(dataGeoAug3$Time, format="%H:%M:%S")
 tdiff_aug3 <- as.numeric(difftime(dataGeoAug3$Time, dataGeoAug3$Time[1], units = "mins"))
@@ -89,7 +89,7 @@ ggplot(aug3_stim, aes(Time_Elapsed)) +
 
 
 ###########C###########
-dataGeoAug10 <- read.csv("geomonitor_aug10.csv")
+dataGeoAug10 <- read.csv("../data/geomonitor_aug10.csv")
 # time elapsed
 dataGeoAug10$Time <- as.POSIXct(dataGeoAug10$Time, format="%H:%M:%S")
 tdiff_aug10 <- as.numeric(difftime(dataGeoAug10$Time, dataGeoAug10$Time[1], units = "mins"))
@@ -123,7 +123,7 @@ ggplot(aug10_stim, aes(Time_Elapsed)) +
 ########### FIGURE 4.5 - H2O2 levels of interval 11 water ###########
 cbPalette <- c( "#CC79A7","#D55E00", "#0072B2")
 
-h2o2_all <- read.csv("h2o2_all2.csv")
+h2o2_all <- read.csv("../data/h2o2_all2.csv")
 h2o2_stim <- h2o2_all[1:44,]
 # Replace negative values in the H2O2 column with 0.00625
 h2o2_all$H2O2[h2o2_all$H2O2 < 0] <- 0.00625
@@ -146,7 +146,7 @@ ggplot(h2o2_all, aes(x=Liters, y=H2O2, color=Experiment)) +
 
 ########### FIGURE 4.6 - Redox potential of ST1 interval 11 water ###########
 # Baseline
-dataORPbase <- read.csv("ORP_base.csv")
+dataORPbase <- read.csv("../data/ORP_base.csv")
 # Add day to Time
 dataORPbase$Time <- paste0("2023-07-27 ", dataORPbase$Time)
 # reformat time column
@@ -156,11 +156,11 @@ tdiff_base <- as.numeric(difftime(dataORPbase$Time, dataORPbase$Time[1], units =
 dataORPbase$Time_Elapsed <- tdiff_base
 
 # Aug 3
-dataORP1_1 <- read.csv("Day1ORP_s1.csv")
+dataORP1_1 <- read.csv("../data/Day1ORP_s1.csv")
 # Add day to Time
 dataORP1_1$Time <- paste0("2023-08-03 ", dataORP1_1$Time)
 # Data Day 2
-dataORP2_1 <- read.csv("Day2ORP_s1.csv")
+dataORP2_1 <- read.csv("../data/Day2ORP_s1.csv")
 # Add day to Time
 dataORP2_1$Time <- paste0("2023-08-04 ", dataORP2_1$Time)
 # Append Day 2 to Day 1
@@ -172,11 +172,11 @@ tdiff_st1 <- as.numeric(difftime(dataORP_1$Time, dataORP_1$Time[1], units = "hou
 dataORP_1$Time_Elapsed <- tdiff_st1
 
 # Aug 10
-dataORP1_2 <- read.csv("Day1ORP_s2.csv")
+dataORP1_2 <- read.csv("../data/Day1ORP_s2.csv")
 # Add day to Time
 dataORP1_2$Time <- paste0("2023-08-10 ", dataORP1_2$Time)
 # Data Day 2
-dataORP2_2 <- read.csv("Day2ORP_s2.csv")
+dataORP2_2 <- read.csv("../data/Day2ORP_s2.csv")
 # Add day to Time
 dataORP2_2$Time <- paste0("2023-08-11 ", dataORP2_2$Time)
 # Append Day 2 to Day 1
@@ -234,7 +234,7 @@ dataORP_avg <- dataORP_avg[,-4]
 # interpolate liters outflow so I can combine all 3 plots and plot by outflow
 
 # first for high seismicity
-outflow_high <- read.csv("high_liters.csv")
+outflow_high <- read.csv("../data/high_liters.csv")
 # reformat time column
 outflow_high$Time <- as.POSIXct(outflow_high$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -246,7 +246,7 @@ dataORP_avg3$Water <- "Formation"
 dataORP_avg3$Water[1:69] <- "Borehole"
 
 # low seismicity
-outflow_low <- read.csv("low_liters.csv")
+outflow_low <- read.csv("../data/low_liters.csv")
 # reformat time column
 outflow_low$Time <- as.POSIXct(outflow_low$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -258,7 +258,7 @@ dataORP_avg2$Water <- "Formation"
 dataORP_avg2$Water[1:100] <- "Borehole"
 
 # baseline
-outflow_base <- read.csv("base_liters.csv")
+outflow_base <- read.csv("../data/base_liters.csv")
 # reformat time column
 outflow_base$Time <- as.POSIXct(outflow_base$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -303,7 +303,7 @@ ggplot(combined_data, aes(x=Liters_Outflow, y=avg_ORP, color=Experiment_Water)) 
 
 ########### FIGURE 4.7 - EC of ST1 interval 11 water ###########
 # Baseline
-dataECbase <- read.csv("EC_base.csv")
+dataECbase <- read.csv("../data/EC_base.csv")
 # Add day to Time
 dataECbase$Time <- paste0("2023-07-27 ", dataECbase$Time)
 # reformat time column
@@ -314,11 +314,11 @@ dataECbase$Time_Elapsed <- tdiff_base
 
 
 # Aug 3
-dataEC1_1 <- read.csv("Day1EC_s1.csv")
+dataEC1_1 <- read.csv("../data/Day1EC_s1.csv")
 # Add day to Time
 dataEC1_1$Time <- paste0("2023-08-03 ", dataEC1_1$Time)
 # Data Day 2
-dataEC2_1 <- read.csv("Day2EC_s1.csv")
+dataEC2_1 <- read.csv("../data/Day2EC_s1.csv")
 # Add day to Time
 dataEC2_1$Time <- paste0("2023-08-04 ", dataEC2_1$Time)
 # Append Day 2 to Day 1
@@ -330,11 +330,11 @@ tdiff_st1 <- as.numeric(difftime(dataEC_1$Time, dataEC_1$Time[1], units = "hours
 dataEC_1$Time_Elapsed <- tdiff_st1
 
 # Aug 10
-dataEC1_2 <- read.csv("Day1EC_s2.csv")
+dataEC1_2 <- read.csv("../data/Day1EC_s2.csv")
 # Add day to Time
 dataEC1_2$Time <- paste0("2023-08-10 ", dataEC1_2$Time)
 # Data Day 2
-dataEC2_2 <- read.csv("Day2EC_s2.csv")
+dataEC2_2 <- read.csv("../data/Day2EC_s2.csv")
 # Add day to Time
 dataEC2_2$Time <- paste0("2023-08-11 ", dataEC2_2$Time)
 # Append Day 2 to Day 1
@@ -383,7 +383,7 @@ dataEC_avg <- dataEC_avg[,-4]
 # interpolate liters outflow so I can combine all 3 plots and plot by outflow
 
 # first for high seismicity
-outflow_high <- read.csv("high_liters.csv")
+outflow_high <- read.csv("../data/high_liters.csv")
 # reformat time column
 outflow_high$Time <- as.POSIXct(outflow_high$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -395,7 +395,7 @@ dataEC_avg3$Water <- "Formation"
 dataEC_avg3$Water[1:69] <- "Borehole"
 
 # low seismicity
-outflow_low <- read.csv("low_liters.csv")
+outflow_low <- read.csv("../data/low_liters.csv")
 # reformat time column
 outflow_low$Time <- as.POSIXct(outflow_low$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -407,7 +407,7 @@ dataEC_avg2$Water <- "Formation"
 dataEC_avg2$Water[1:100] <- "Borehole"
 
 # baseline
-outflow_base <- read.csv("base_liters.csv")
+outflow_base <- read.csv("../data/base_liters.csv")
 # reformat time column
 outflow_base$Time <- as.POSIXct(outflow_base$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -452,7 +452,7 @@ ggplot(combined_data, aes(x=Liters_Outflow, y=avg_EC, color=Experiment_Water)) +
 
 ########### FIGURE 4.8 - pH of ST1 interval 11 water ###########
 # Baseline
-datapHbase <- read.csv("pH_base.csv")
+datapHbase <- read.csv("../data/pH_base.csv")
 # Add day to Time
 datapHbase$Time <- paste0("2023-07-27 ", datapHbase$Time)
 # reformat time column
@@ -463,11 +463,11 @@ datapHbase$Time_Elapsed <- tdiff_base
 
 
 # Aug 3
-datapH1_1 <- read.csv("Day1pH_s1.csv")
+datapH1_1 <- read.csv("../data/Day1pH_s1.csv")
 # Add day to Time
 datapH1_1$Time <- paste0("2023-08-03 ", datapH1_1$Time)
 # Data Day 2
-datapH2_1 <- read.csv("Day2pH_s1.csv")
+datapH2_1 <- read.csv("../data/Day2pH_s1.csv")
 # Add day to Time
 datapH2_1$Time <- paste0("2023-08-04 ", datapH2_1$Time)
 # Append Day 2 to Day 1
@@ -479,11 +479,11 @@ tdiff_st1 <- as.numeric(difftime(datapH_1$Time, datapH_1$Time[1], units = "hours
 datapH_1$Time_Elapsed <- tdiff_st1
 
 # Aug 10
-datapH1_2 <- read.csv("Day1pH_s2.csv")
+datapH1_2 <- read.csv("../data/Day1pH_s2.csv")
 # Add day to Time
 datapH1_2$Time <- paste0("2023-08-10 ", datapH1_2$Time)
 # Data Day 2
-datapH2_2 <- read.csv("Day2pH_s2.csv")
+datapH2_2 <- read.csv("../data/Day2pH_s2.csv")
 # Add day to Time
 datapH2_2$Time <- paste0("2023-08-11 ", datapH2_2$Time)
 # Append Day 2 to Day 1
@@ -541,7 +541,7 @@ datapH_avg <- datapH_avg[,-4]
 # interpolate liters outflow so I can combine all 3 plots and plot by outflow
 
 # first for high seismicity
-outflow_high <- read.csv("high_liters.csv")
+outflow_high <- read.csv("../data/high_liters.csv")
 # reformat time column
 outflow_high$Time <- as.POSIXct(outflow_high$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -553,7 +553,7 @@ datapH_avg3$Water <- "Formation"
 datapH_avg3$Water[1:69] <- "Borehole"
 
 # low seismicity
-outflow_low <- read.csv("low_liters.csv")
+outflow_low <- read.csv("../data/low_liters.csv")
 # reformat time column
 outflow_low$Time <- as.POSIXct(outflow_low$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -567,7 +567,7 @@ datapH_avg2$Water[1:100] <- "Borehole"
 datapH_avg2 <- datapH_avg2[-c(1:2),]
 
 # baseline
-outflow_base <- read.csv("base_liters.csv")
+outflow_base <- read.csv("../data/base_liters.csv")
 # reformat time column
 outflow_base$Time <- as.POSIXct(outflow_base$Time, format="%Y-%m-%d %H:%M:%S")
 
@@ -613,7 +613,7 @@ ggplot(combined_data, aes(x=Liters_Outflow, y=avg_pH, color=Experiment_Water)) +
 ########### FIGURE 4.9 - Seismic activity resulting from hydraulic stimulation ###########
 
 ###########A###########
-epm <- read.csv("epm.csv")
+epm <- read.csv("../data/epm.csv")
 
 # August 3
 ggplot(epm, aes(x = Time_Elapsed, y = EPM_Aug3)) +
@@ -654,8 +654,8 @@ ggplot() +
   ylim(0,750)
 
 ###########B###########
-s1 <- read.csv('Aug3.csv')
-s2 <- read.csv('Aug10.csv')
+s1 <- read.csv('../data/Aug3.csv')
+s2 <- read.csv('../data/Aug10.csv')
 
 # Parse the isotime column to POSIXct format
 s1 <- s1 %>%
@@ -698,7 +698,7 @@ ggplot(s2, aes(x = isotime, y = magnitude)) +
 
 ###########D###########
 # Load borehole coordinates dictionary
-data <- readLines('borehole-coordinates-dictionary.txt')
+data <- readLines('../data/borehole-coordinates-dictionary.txt')
 d <- jsonlite::fromJSON(data)
 
 # Combine the coordinates from the JSON data into a single data frame
@@ -724,7 +724,7 @@ p
 ########### FIGURE S1.6 - Grain-size dependent mechanoradical ROS production ###########
 
 ###########A###########
-df6 <- read.csv("table_granite.csv")
+df6 <- read.csv("../data/table_granite.csv")
 df6$Sample <- gsub("um", "μm", df6$Sample)
 df6$Time <- as.factor(df6$Time)
 df6$Sample <- factor(df6$Sample,levels = c("Granite + Water (<45 μm)","Granite + Water (45-106 μm)","Granite + Water (106-150 μm)"))
@@ -751,7 +751,7 @@ ggplot(df6, aes(x=Time, y=H2O2, fill=Sample)) +
 
 
 ###########B###########
-granite <- read.csv("table4.csv")
+granite <- read.csv("../data/table4.csv")
 granite$Sample <- gsub("um", "μm", granite$Sample)
 granite$Time <- as.factor(granite$Time)
 
